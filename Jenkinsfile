@@ -29,7 +29,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t aceest-fitness .'
+                bat 'C:\\Users\\abdul\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe build -t aceest-fitness .'
             }
         }
     }
