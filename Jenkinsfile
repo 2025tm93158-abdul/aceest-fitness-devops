@@ -23,7 +23,7 @@ pipeline {
 
         stage('Code Quality') {
             steps {
-                bat 'flake8 .'
+                bat 'C:\\Users\\abdul\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -m flake8 .'
             }
         }
 
