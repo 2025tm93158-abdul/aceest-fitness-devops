@@ -27,11 +27,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements-dev.txt
 
-      - name: Run Pytest
-        run: pytest
-
       - name: Run Flake8
         run: flake8 .
 
       - name: Build Docker image
         run: docker build -t aceest-fitness .
+
+      - name: Run Pytest inside Docker container
+        run: |
+          docker run --rm aceest-fitness sh -c \
+            "pip install --no-cache-dir pytest && pytest"
