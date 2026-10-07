@@ -134,9 +134,9 @@ The workflow:
 1. Checks out the source code.
 2. Sets up Python 3.11.
 3. Installs development dependencies.
-4. Runs Pytest.
-5. Runs Flake8.
-6. Builds the Docker image.
+4. Runs Flake8.
+5. Builds the Docker image.
+6. Runs Pytest inside the Docker container.
 
 It runs for pushes to `main` and feature branches, and for pull requests targeting `main`.
 
