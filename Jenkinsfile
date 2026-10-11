@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
 
@@ -10,20 +11,23 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'python3 -m pip install --upgrade pip'
-                sh 'python3 -m pip install -r requirements-dev.txt'
+                sh '''
+                    python3 -m venv .venv
+                    .venv/bin/python -m pip install --upgrade pip
+                    .venv/bin/python -m pip install -r requirements-dev.txt
+                '''
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'python3 -m pytest'
+                sh '.venv/bin/python -m pytest'
             }
         }
 
         stage('Code Quality') {
             steps {
-                sh 'python3 -m flake8 .'
+                sh '.venv/bin/python -m flake8 .'
             }
         }
 
