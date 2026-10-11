@@ -1,3 +1,4 @@
+```groovy
 pipeline {
     agent any
 
@@ -10,26 +11,26 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'C:\\Users\\abdul\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -m pip install --upgrade pip'
-		bat 'C:\\Users\\abdul\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -m pip install -r requirements-dev.txt'
+                sh 'python3 -m pip install --upgrade pip'
+                sh 'python3 -m pip install -r requirements-dev.txt'
             }
         }
 
         stage('Run Tests') {
             steps {
-                bat 'C:\\Users\\abdul\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -m pytest'
+                sh 'python3 -m pytest'
             }
         }
 
         stage('Code Quality') {
             steps {
-                bat 'C:\\Users\\abdul\\AppData\\Local\\Programs\\Python\\Python314\\python.exe -m flake8 .'
+                sh 'python3 -m flake8 .'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                bat 'C:\\Users\\abdul\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe build -t aceest-fitness .'
+                sh 'docker build -t aceest-fitness .'
             }
         }
     }
@@ -40,3 +41,4 @@ pipeline {
         }
     }
 }
+```
