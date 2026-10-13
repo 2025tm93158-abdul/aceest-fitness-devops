@@ -191,6 +191,21 @@ Run CI checks
 Merge into main
 ```
 
+## CI/CD Integration Overview
+
+GitHub Actions and Jenkins work together as two layers of quality checks:
+
+- **GitHub Actions (cloud CI):** Triggers automatically on every push and
+  pull request. It runs Flake8, builds the Docker image, and runs Pytest
+  inside the container, so problems are caught before code is merged into `main`.
+  
+- **Jenkins (build server CI):** Defined in the `Jenkinsfile`. It pulls the
+  latest code, installs dependencies, runs Pytest and Flake8, and builds the
+  Docker image on the Jenkins build agent.
+
+Both pipelines validate the same code with the same checks, so a change is
+only trusted once it passes in both places.
+
 ## License
 
 This project is created for the ACEEST Fitness DevOps assignment.
