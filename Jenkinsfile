@@ -11,29 +11,29 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh '''
-                    python3 -m venv .venv
-                    .venv/bin/python -m pip install --upgrade pip
-                    .venv/bin/python -m pip install -r requirements-dev.txt
+                bat '''
+                    python -m venv .venv
+                    .venv\\Scripts\\python.exe -m pip install --upgrade pip
+                    .venv\\Scripts\\python.exe -m pip install -r requirements-dev.txt
                 '''
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh '.venv/bin/python -m pytest'
+                bat '.venv\\Scripts\\python.exe -m pytest'
             }
         }
 
         stage('Code Quality') {
             steps {
-                sh '.venv/bin/python -m flake8 .'
+                bat '.venv\\Scripts\\python.exe -m flake8 .'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t aceest-fitness .'
+                bat 'docker build -t aceest-fitness .'
             }
         }
     }
