@@ -1,0 +1,10 @@
+.git
+.venv
+.scannerwork
+.pytest_cache
+reports
+.coverage
+coverage.xml
+**/__pycache__
+.env
+.env.*
