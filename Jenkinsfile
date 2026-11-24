@@ -74,6 +74,29 @@ pipeline {
                 '''
             }
         }
+
+        stage('Push to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-credentials',
+                    usernameVariable: 'DOCKERHUB_USER',
+                    passwordVariable: 'DOCKERHUB_TOKEN'
+                )]) {
+                    sh '''
+                        set +x
+                        DOCKER_CONFIG="$(mktemp -d)"
+                        export DOCKER_CONFIG
+                        trap 'rm -rf -- "$DOCKER_CONFIG"' EXIT
+
+                        printf '%s' "$DOCKERHUB_TOKEN" | docker login --username "$DOCKERHUB_USER" --password-stdin
+                        IMAGE="2025tm93158/aceest-fitness:vm-$(git rev-parse --short=12 HEAD)"
+                        docker tag aceest-fitness:ci "$IMAGE"
+                        docker push "$IMAGE"
+                        echo "Published $IMAGE"
+                    '''
+                }
+            }
+        }
     }
 
     post {
